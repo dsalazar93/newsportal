@@ -23,14 +23,15 @@ class HomeController extends Controller
 
     public function homeNews(){
         $news = News::all();
-
+        // dd($news);
         foreach($news as $n){
             $author = User::find($n->user_id);
-            $newsCategory = NewsCategory::find($n->id);
-            $category = Category::find($newsCategory->category_id);
+            $newsCategory = NewsCategory::where('news_id', $n->id)->get();
+            $category = Category::find($newsCategory[0]->category_id);
 
             $n->author = $author->name;
             $n->category = $category->name;
+            $n->cat_id = $category->id;
         }
 
         return view('welcome', compact('news'));
