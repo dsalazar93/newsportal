@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
 use Illuminate\Http\Request;
+
+use App\News;
+use App\User;
+use App\NewsCategory;
+use App\Category;
 
 class CategoryController extends Controller
 {
@@ -14,7 +18,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -41,12 +45,20 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show($cat_id)
     {
-        //
+        $category = Category::find($cat_id);
+        $newsCategory = NewsCategory::where('category_id', $cat_id)->get();
+        $news = [];
+        foreach($newsCategory as $nc){
+            $n = News::find($nc->news_id);
+            $n->category = $category->name;
+            $n->cat_id = $cat_id;
+            array_push($news, $n);
+        }
+
+        return view('welcome', compact('news'));
     }
 
     /**

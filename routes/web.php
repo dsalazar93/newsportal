@@ -23,6 +23,8 @@ Route::get('misnoticias/editar/{news_id}', 'NewsController@edit')->name('edit_ne
 Route::post('misnoticias/actualizar', 'NewsController@update')->name('update_news')->middleware('auth');
 Route::get('misnoticias/delete/{news_id}', 'NewsController@destroy')->name('delete_news')->middleware('auth');
 
+Route::get('categoria/{cat_id}', 'CategoryController@show')->name('category')->middleware('auth');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
