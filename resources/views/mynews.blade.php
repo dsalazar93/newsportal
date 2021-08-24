@@ -12,7 +12,7 @@
                 <div class="col-12 my-2 border rounded">
                     <div class="row">
                         <div class="col-4 d-flex align-items-center justify-content-center">
-                            <img src='{{"storage/$item->image"}}' alt="" class="w-100">
+                            <img src='{{asset("storage/$item->image")}}' alt="" class="w-100">
                         </div>
                         <div class="col-8">
                             <h1>{{$item->title}}</h1>
