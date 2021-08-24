@@ -13,9 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@homeNews')->name('home_news');
+Route::get('noticia/{news_id}', 'NewsController@show')->name('news')->middleware('auth');
+
+Route::get('misnoticias', 'NewsController@index')->name('my_news')->middleware('auth');
+Route::get('misnoticias/nueva', 'NewsController@create')->name('create_news')->middleware('auth');
+Route::post('misnoticias/guardar', 'NewsController@store')->name('save_news')->middleware('auth');
+Route::get('misnoticias/editar/{news_id}', 'NewsController@edit')->name('edit_news')->middleware('auth');
+Route::post('misnoticias/actualizar', 'NewsController@update')->name('update_news')->middleware('auth');
+Route::get('misnoticias/delete/{news_id}', 'NewsController@destroy')->name('delete_news')->middleware('auth');
 
 Auth::routes();
 

@@ -8,7 +8,7 @@ use Faker\Generator as Faker;
 $factory->define(News::class, function (Faker $faker) {
     return [
         'title' => $faker->sentence(5),
-        'content' => $faker->text(500),
+        'content' => $faker->sentence(500),
         'user_id' => factory(App\User::class)
     ];
 });
